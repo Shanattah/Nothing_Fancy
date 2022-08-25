@@ -1,13 +1,10 @@
-1-
+1- Yes it responds correctly since you're testing that you're getting the code and not that it's missing.
 
 
-2- A data transfer object (DTO) is an object that carries data between processes.
-You can use this technique to facilitate communication between two systems
-(like an API and your server) without potentially exposing sensitive information.
+2- Answer: You should not unittest DTO's getters and setters, unless they contain some complex logic that requires
+testing. Generally the tests are tested in their respective unittests and thus don't need to be tested in the DTO
 
-Answer: You should not unittest DTO's getters and setters, unless they contain some complex logic that requires testing.
+3- The URL for selling is misleading as it's the amount in SEK not the currency in the URL. The rate is a weak part
+since it's the same rate for buying and selling thus you can get rounded up and just keep exchanging at certain levels
+to make money off the system. That you need to exchange Euro to SEK then SEK to USD instead of exchanging Euro to USD straight away.
 
-
-
-
-3-
