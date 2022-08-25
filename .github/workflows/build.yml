@@ -1,9 +1,11 @@
-name: Build Java
+name: Run tests before merge
 
-on: [pull_request]
+on:
+  pull_request:
+    branches: [main]
 
 jobs:
-  build:
+  run_tests:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v3
@@ -15,4 +17,4 @@ jobs:
           distribution: 'adopt'
 
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots package
+        run: mvm --batch-mode --update-snapshots package
