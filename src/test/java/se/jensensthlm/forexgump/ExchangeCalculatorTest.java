@@ -1,5 +1,6 @@
 package se.jensensthlm.forexgump;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,6 +8,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -50,5 +52,25 @@ public class ExchangeCalculatorTest {
         var expectedPriceInGbp = 10.0;
         var actualPriceInSek = exchangeCalculator.calculateSell(targetCurrency, amount);
         assertEquals(expectedPriceInGbp, actualPriceInSek);
+    }
+    @Test
+    public void TestSameCurrencyIllegalArgumentOnBuy() {
+        var targetCurrency = "SEK";
+        var amount = 100.0;
+        var rate = 10.0;
+        when(exchangeProvider.get("SEK",targetCurrency))
+                .thenReturn(new ExchangeDetails("SEK", targetCurrency, rate));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> exchangeCalculator.calculateBuy("SEK",100));
+    }
+    @Test
+    public void TestSameCurrencyIllegalArgumentOnSell() {
+        var targetCurrency = "SEK";
+        var amount = 100.0;
+        var rate = 10.0;
+        when(exchangeProvider.get("SEK",targetCurrency))
+                .thenReturn(new ExchangeDetails("SEK", targetCurrency, rate));
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> exchangeCalculator.calculateSell("SEK",100));
     }
 }
