@@ -28,7 +28,7 @@ public class ExchangeCalculatorTest {
         var targetCurrency = "GBP";
         var amount = 100.0;
         var rate = 10.0;
-        when(exchangeProvider.get("SEK",targetCurrency))
+        when(exchangeProvider.get("SEK", targetCurrency))
                 .thenReturn(new ExchangeDetails("SEK", targetCurrency, rate));
 
         var expectedPriceInSek = 1000.0;
@@ -46,31 +46,33 @@ public class ExchangeCalculatorTest {
         var amount = 100.0;
         var rate = 10.0;
 
-        when(exchangeProvider.get("SEK",targetCurrency))
+        when(exchangeProvider.get("SEK", targetCurrency))
                 .thenReturn(new ExchangeDetails("SEK", targetCurrency, rate));
 
         var expectedPriceInGbp = 10.0;
         var actualPriceInSek = exchangeCalculator.calculateSell(targetCurrency, amount);
         assertEquals(expectedPriceInGbp, actualPriceInSek);
     }
+
     @Test
     public void TestSameCurrencyIllegalArgumentOnBuy() {
         var targetCurrency = "SEK";
         var amount = 100.0;
         var rate = 10.0;
-        when(exchangeProvider.get("SEK",targetCurrency))
+        when(exchangeProvider.get("SEK", targetCurrency))
                 .thenReturn(new ExchangeDetails("SEK", targetCurrency, rate));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> exchangeCalculator.calculateBuy("SEK",100));
+                () -> exchangeCalculator.calculateBuy("SEK", 100));
     }
+
     @Test
     public void TestSameCurrencyIllegalArgumentOnSell() {
         var targetCurrency = "SEK";
         var amount = 100.0;
         var rate = 10.0;
-        when(exchangeProvider.get("SEK",targetCurrency))
+        when(exchangeProvider.get("SEK", targetCurrency))
                 .thenReturn(new ExchangeDetails("SEK", targetCurrency, rate));
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> exchangeCalculator.calculateSell("SEK",100));
+                () -> exchangeCalculator.calculateSell("SEK", 100));
     }
 }

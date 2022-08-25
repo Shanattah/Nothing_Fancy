@@ -1,6 +1,5 @@
 1- Yes it responds correctly since you're testing that you're getting the code and not that it's missing.
 
-
 2- Answer: You should not unittest DTO's getters and setters, unless they contain some complex logic that requires
 testing. Generally the tests are tested in their respective unittests and thus don't need to be tested in the DTO
 
